@@ -1,0 +1,569 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SigaAppDB03Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CreditNote">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="CustomerNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="Observation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="DevolutionID" Type="Int32" />
+    <Property Name="InvoiceID" Type="Int32" />
+    <Property Name="PrinterCount" Type="Int32" />
+    <Property Name="Imported" Type="Boolean" Nullable="false" />
+    <Property Name="InvoiceHeaders_ID" Type="Int32" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_CreditNotes_dbo_Customers_CustomerID" FromRole="CreditNotes" ToRole="Customers" />
+    <NavigationProperty Name="Devolution" Relationship="Self.FK_dbo_CreditNotes_dbo_Devolutions_DevolutionID" FromRole="CreditNotes" ToRole="Devolutions" />
+    <NavigationProperty Name="InvoiceHeader" Relationship="Self.FK_dbo_CreditNotes_dbo_InvoiceHeaders_InvoiceHeaders_ID" FromRole="CreditNotes" ToRole="InvoiceHeaders" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Clase" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Comment1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Comment2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreateAt" Type="DateTime" Precision="7" />
+    <Property Name="CreateBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerDir" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+    <Property Name="Phone1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ShippingMth" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="VendorCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CreditNotes" Relationship="Self.FK_dbo_CreditNotes_dbo_Customers_CustomerID" FromRole="Customers" ToRole="CreditNotes" />
+    <NavigationProperty Name="Devolutions" Relationship="Self.FK_dbo_Devolutions_dbo_Customers_CustomerID" FromRole="Customers" ToRole="Devolutions" />
+    <NavigationProperty Name="Payments" Relationship="Self.FK_dbo_Payments_dbo_Customers_Customers_ID" FromRole="Customers" ToRole="Payments" />
+    <NavigationProperty Name="SalesOrders" Relationship="Self.FK_dbo_SalesOrders_dbo_Customers_CustomerID" FromRole="Customers" ToRole="SalesOrders" />
+    <Property Name="Actualizado" Type="Int32" />
+    <Property Name="Compania" Type="Int32" />
+  </EntityType>
+  <EntityType Name="DevolutionItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DevolutionID" Type="Int32" />
+    <Property Name="ProductID" Type="Int32" />
+    <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProductCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Qty" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="Devolution" Relationship="Self.FK_dbo_DevolutionItems_dbo_Devolutions_DevolutionID" FromRole="DevolutionItems" ToRole="Devolutions" />
+  </EntityType>
+  <EntityType Name="Devolution">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceID" Type="Int32" />
+    <Property Name="InvoiceNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PrinterCount" Type="Int32" Nullable="false" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="Imported" Type="Boolean" Nullable="false" />
+    <Property Name="SalesOrders_ID" Type="Int32" />
+    <NavigationProperty Name="CreditNotes" Relationship="Self.FK_dbo_CreditNotes_dbo_Devolutions_DevolutionID" FromRole="Devolutions" ToRole="CreditNotes" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_Devolutions_dbo_Customers_CustomerID" FromRole="Devolutions" ToRole="Customers" />
+    <NavigationProperty Name="DevolutionItems" Relationship="Self.FK_dbo_DevolutionItems_dbo_Devolutions_DevolutionID" FromRole="Devolutions" ToRole="DevolutionItems" />
+    <NavigationProperty Name="InvoiceHeader" Relationship="Self.FK_dbo_Devolutions_dbo_InvoiceHeaders_InvoiceID" FromRole="Devolutions" ToRole="InvoiceHeaders" />
+    <NavigationProperty Name="SalesOrder" Relationship="Self.FK_dbo_Devolutions_dbo_SalesOrders_SalesOrders_ID" FromRole="Devolutions" ToRole="SalesOrders" />
+  </EntityType>
+  <EntityType Name="InvoiceHeader">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="SALESID" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="INVOICEID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="PAYMENT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="INVOICEDATE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DUEDATE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="INVOICEAMOUNT" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="INVOICINGNAME" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="PrintCounterDevolution" Type="Int32" Nullable="false" />
+    <Property Name="PrintCounterCreditNote" Type="Int32" Nullable="false" />
+    <Property Name="INVOICEACCOUNT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PayedAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <NavigationProperty Name="CreditNotes" Relationship="Self.FK_dbo_CreditNotes_dbo_InvoiceHeaders_InvoiceHeaders_ID" FromRole="InvoiceHeaders" ToRole="CreditNotes" />
+    <NavigationProperty Name="Devolutions" Relationship="Self.FK_dbo_Devolutions_dbo_InvoiceHeaders_InvoiceID" FromRole="InvoiceHeaders" ToRole="Devolutions" />
+    <NavigationProperty Name="Payments" Relationship="Self.FK_dbo_Payments_dbo_InvoiceHeaders_InvoiceHeaders_ID" FromRole="InvoiceHeaders" ToRole="Payments" />
+  </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="datetime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Success" Type="Boolean" Nullable="false" />
+    <Property Name="totalofpayment" Type="Int32" Nullable="false" />
+    <Property Name="UserFrom" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="PaymentItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PaymentOrderId" Type="Int32" Nullable="false" />
+    <Property Name="InvoiceNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AmountApply" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="InvoiveAmountAtMoment" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="PaymentOrder" Relationship="Self.FK_dbo_PaymentItems_dbo_PaymentOrders_PaymentOrderId" FromRole="PaymentItems" ToRole="PaymentOrders" />
+  </EntityType>
+  <EntityType Name="PaymentOrder">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VendorID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Datetime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Method" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BankName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CheckNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CheckDate" Type="DateTime" Precision="3" />
+    <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="Customer_Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="IsOpen" Type="Boolean" Nullable="false" />
+    <Property Name="Imported" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="PaymentItems" Relationship="Self.FK_dbo_PaymentItems_dbo_PaymentOrders_PaymentOrderId" FromRole="PaymentOrders" ToRole="PaymentItems" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DocDate" Type="DateTime" Precision="0" />
+    <Property Name="INVOICENUMBER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="AMOUNT" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="INVOICEID" Type="Int32" Nullable="false" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="CheckNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfCheck" Type="DateTime" Precision="3" />
+    <Property Name="PaymentType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PrinterCount" Type="Int32" Nullable="false" />
+    <Property Name="Imported" Type="Boolean" Nullable="false" />
+    <Property Name="Bank" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="Customers_ID" Type="Int32" />
+    <Property Name="InvoiceHeaders_ID" Type="Int32" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_Payments_dbo_Customers_Customers_ID" FromRole="Payments" ToRole="Customers" />
+    <NavigationProperty Name="InvoiceHeader" Relationship="Self.FK_dbo_Payments_dbo_InvoiceHeaders_InvoiceHeaders_ID" FromRole="Payments" ToRole="InvoiceHeaders" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CreateAt" Type="DateTime" Precision="7" />
+    <Property Name="CreateBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="ProductCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProductID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Qty" Type="Int32" Nullable="false" />
+    <Property Name="TypeOSales" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UoM" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SalesLines" Relationship="Self.FK_dbo_SalesLines_dbo_Products_Products_ID" FromRole="Products" ToRole="SalesLines" />
+    <Property Name="Sincronizado" Type="Int32" />
+    <Property Name="Compania" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Profiler">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="SalesLine">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="SalesOrdersID" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Qty" Type="Int32" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="ProductCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Products_ID" Type="Int32" />
+    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_dbo_SalesLines_dbo_Products_Products_ID" FromRole="SalesLines" ToRole="Products" />
+    <NavigationProperty Name="SalesOrder" Relationship="Self.FK_dbo_SalesLines_dbo_SalesOrders_SalesOrdersID" FromRole="SalesLines" ToRole="SalesOrders" />
+    <Property Name="compania" Type="Int32" />
+    <Property Name="sincronizado" Type="Int32" />
+  </EntityType>
+  <EntityType Name="SalesOrder">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Cash" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Change" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CreateAt" Type="DateTime" Precision="7" />
+    <Property Name="CreateBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="GPID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+    <Property Name="Totals" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="VAT" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="UserCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="Commets" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_SalesOrders_dbo_Customers_CustomerID" FromRole="SalesOrders" ToRole="Customers" />
+    <NavigationProperty Name="Devolutions" Relationship="Self.FK_dbo_Devolutions_dbo_SalesOrders_SalesOrders_ID" FromRole="SalesOrders" ToRole="Devolutions" />
+    <NavigationProperty Name="SalesLines" Relationship="Self.FK_dbo_SalesLines_dbo_SalesOrders_SalesOrdersID" FromRole="SalesOrders" ToRole="SalesLines" />
+  </EntityType>
+  <Association Name="FK_dbo_CreditNotes_dbo_Customers_CustomerID">
+    <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="CreditNotes" Type="Self.CreditNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CreditNotes">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_CreditNotes_dbo_Devolutions_DevolutionID">
+    <End Role="Devolutions" Type="Self.Devolution" Multiplicity="0..1" />
+    <End Role="CreditNotes" Type="Self.CreditNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Devolutions">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CreditNotes">
+        <PropertyRef Name="DevolutionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_CreditNotes_dbo_InvoiceHeaders_InvoiceHeaders_ID">
+    <End Role="InvoiceHeaders" Type="Self.InvoiceHeader" Multiplicity="0..1" />
+    <End Role="CreditNotes" Type="Self.CreditNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvoiceHeaders">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CreditNotes">
+        <PropertyRef Name="InvoiceHeaders_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Devolutions_dbo_Customers_CustomerID">
+    <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Devolutions" Type="Self.Devolution" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Devolutions">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Payments_dbo_Customers_Customers_ID">
+    <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Payments" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Payments">
+        <PropertyRef Name="Customers_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_SalesOrders_dbo_Customers_CustomerID">
+    <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="SalesOrders" Type="Self.SalesOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SalesOrders">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_DevolutionItems_dbo_Devolutions_DevolutionID">
+    <End Role="Devolutions" Type="Self.Devolution" Multiplicity="0..1" />
+    <End Role="DevolutionItems" Type="Self.DevolutionItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Devolutions">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DevolutionItems">
+        <PropertyRef Name="DevolutionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Devolutions_dbo_InvoiceHeaders_InvoiceID">
+    <End Role="InvoiceHeaders" Type="Self.InvoiceHeader" Multiplicity="0..1" />
+    <End Role="Devolutions" Type="Self.Devolution" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvoiceHeaders">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Devolutions">
+        <PropertyRef Name="InvoiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Devolutions_dbo_SalesOrders_SalesOrders_ID">
+    <End Role="SalesOrders" Type="Self.SalesOrder" Multiplicity="0..1" />
+    <End Role="Devolutions" Type="Self.Devolution" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesOrders">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Devolutions">
+        <PropertyRef Name="SalesOrders_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Payments_dbo_InvoiceHeaders_InvoiceHeaders_ID">
+    <End Role="InvoiceHeaders" Type="Self.InvoiceHeader" Multiplicity="0..1" />
+    <End Role="Payments" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvoiceHeaders">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Payments">
+        <PropertyRef Name="InvoiceHeaders_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_PaymentItems_dbo_PaymentOrders_PaymentOrderId">
+    <End Role="PaymentOrders" Type="Self.PaymentOrder" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PaymentItems" Type="Self.PaymentItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentOrders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PaymentItems">
+        <PropertyRef Name="PaymentOrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_SalesLines_dbo_Products_Products_ID">
+    <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="SalesLines" Type="Self.SalesLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SalesLines">
+        <PropertyRef Name="Products_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_SalesLines_dbo_SalesOrders_SalesOrdersID">
+    <End Role="SalesOrders" Type="Self.SalesOrder" Multiplicity="0..1" />
+    <End Role="SalesLines" Type="Self.SalesLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesOrders">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SalesLines">
+        <PropertyRef Name="SalesOrdersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SigaAppDB03Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CreditNotes" EntityType="Self.CreditNote" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="DevolutionItems" EntityType="Self.DevolutionItem" />
+    <EntitySet Name="Devolutions" EntityType="Self.Devolution" />
+    <EntitySet Name="InvoiceHeaders" EntityType="Self.InvoiceHeader" />
+    <EntitySet Name="Notifications" EntityType="Self.Notification" />
+    <EntitySet Name="PaymentItems" EntityType="Self.PaymentItem" />
+    <EntitySet Name="PaymentOrders" EntityType="Self.PaymentOrder" />
+    <EntitySet Name="Payments" EntityType="Self.Payment" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Profilers" EntityType="Self.Profiler" />
+    <EntitySet Name="SalesLines" EntityType="Self.SalesLine" />
+    <EntitySet Name="SalesOrders" EntityType="Self.SalesOrder" />
+    <AssociationSet Name="FK_dbo_CreditNotes_dbo_Customers_CustomerID" Association="Self.FK_dbo_CreditNotes_dbo_Customers_CustomerID">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="CreditNotes" EntitySet="CreditNotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_CreditNotes_dbo_Devolutions_DevolutionID" Association="Self.FK_dbo_CreditNotes_dbo_Devolutions_DevolutionID">
+      <End Role="Devolutions" EntitySet="Devolutions" />
+      <End Role="CreditNotes" EntitySet="CreditNotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_CreditNotes_dbo_InvoiceHeaders_InvoiceHeaders_ID" Association="Self.FK_dbo_CreditNotes_dbo_InvoiceHeaders_InvoiceHeaders_ID">
+      <End Role="InvoiceHeaders" EntitySet="InvoiceHeaders" />
+      <End Role="CreditNotes" EntitySet="CreditNotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Devolutions_dbo_Customers_CustomerID" Association="Self.FK_dbo_Devolutions_dbo_Customers_CustomerID">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Devolutions" EntitySet="Devolutions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Payments_dbo_Customers_Customers_ID" Association="Self.FK_dbo_Payments_dbo_Customers_Customers_ID">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Payments" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_SalesOrders_dbo_Customers_CustomerID" Association="Self.FK_dbo_SalesOrders_dbo_Customers_CustomerID">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="SalesOrders" EntitySet="SalesOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_DevolutionItems_dbo_Devolutions_DevolutionID" Association="Self.FK_dbo_DevolutionItems_dbo_Devolutions_DevolutionID">
+      <End Role="Devolutions" EntitySet="Devolutions" />
+      <End Role="DevolutionItems" EntitySet="DevolutionItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Devolutions_dbo_InvoiceHeaders_InvoiceID" Association="Self.FK_dbo_Devolutions_dbo_InvoiceHeaders_InvoiceID">
+      <End Role="InvoiceHeaders" EntitySet="InvoiceHeaders" />
+      <End Role="Devolutions" EntitySet="Devolutions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Devolutions_dbo_SalesOrders_SalesOrders_ID" Association="Self.FK_dbo_Devolutions_dbo_SalesOrders_SalesOrders_ID">
+      <End Role="SalesOrders" EntitySet="SalesOrders" />
+      <End Role="Devolutions" EntitySet="Devolutions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Payments_dbo_InvoiceHeaders_InvoiceHeaders_ID" Association="Self.FK_dbo_Payments_dbo_InvoiceHeaders_InvoiceHeaders_ID">
+      <End Role="InvoiceHeaders" EntitySet="InvoiceHeaders" />
+      <End Role="Payments" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_PaymentItems_dbo_PaymentOrders_PaymentOrderId" Association="Self.FK_dbo_PaymentItems_dbo_PaymentOrders_PaymentOrderId">
+      <End Role="PaymentOrders" EntitySet="PaymentOrders" />
+      <End Role="PaymentItems" EntitySet="PaymentItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_SalesLines_dbo_Products_Products_ID" Association="Self.FK_dbo_SalesLines_dbo_Products_Products_ID">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="SalesLines" EntitySet="SalesLines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_SalesLines_dbo_SalesOrders_SalesOrdersID" Association="Self.FK_dbo_SalesLines_dbo_SalesOrders_SalesOrdersID">
+      <End Role="SalesOrders" EntitySet="SalesOrders" />
+      <End Role="SalesLines" EntitySet="SalesLines" />
+    </AssociationSet>
+    <EntitySet Name="C__MigrationHistory" EntityType="SigaAppDB03Model.C__MigrationHistory" />
+    <EntitySet Name="AspNetRoles" EntityType="SigaAppDB03Model.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="SigaAppDB03Model.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="SigaAppDB03Model.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="SigaAppDB03Model.AspNetUser" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="SigaAppDB03Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="SigaAppDB03Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="SigaAppDB03Model.AspNetUserRoles">
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="SigaAppDB03Model.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="SigaAppDB03Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="SigaAppDB03Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="SigaAppDB03Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="SigaAppDB03Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+    <NavigationProperty Name="AspNetRoles" Relationship="SigaAppDB03Model.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Type="SigaAppDB03Model.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="SigaAppDB03Model.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaim">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Type="SigaAppDB03Model.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="SigaAppDB03Model.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogin">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="SigaAppDB03Model.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+    <End Type="SigaAppDB03Model.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+  </Association>
+</Schema>

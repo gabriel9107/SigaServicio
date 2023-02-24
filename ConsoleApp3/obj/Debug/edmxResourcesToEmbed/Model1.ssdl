@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SigaAppDB03Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="comentario" Type="nvarchar" MaxLength="200" />
+    <Property Name="codigo" Type="nvarchar" MaxLength="200" />
+    <Property Name="codigoVendedor" Type="nvarchar" MaxLength="200" />
+    <Property Name="direccion" Type="nvarchar" MaxLength="200" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="200" />
+    <Property Name="telefono1" Type="nvarchar" MaxLength="200" />
+    <Property Name="telefono2" Type="nvarchar" MaxLength="200" />
+    <Property Name="compagnia" Type="nchar" MaxLength="10" />
+    <Property Name="activo" Type="nchar" MaxLength="10" />
+    <Property Name="sincronizado" Type="nchar" MaxLength="10" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DetalleFactura">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FacturaId" Type="nvarchar" MaxLength="20" />
+    <Property Name="LineaNumero" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ProductoCodigo" Type="nvarchar" MaxLength="20" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Qty" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="PrecioVenta" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="montoLinea" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Sincronizado" Type="int" Nullable="false" />
+    <Property Name="IsDelete" Type="int" Nullable="false" />
+    <Property Name="Compagnia" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Factura">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="FacturaId" Type="nvarchar" MaxLength="30" />
+    <Property Name="PedidoId" Type="nvarchar" MaxLength="40" />
+    <Property Name="clienteId" Type="nvarchar(max)" />
+    <Property Name="clienteNombre" Type="nvarchar(max)" />
+    <Property Name="FacturaFecha" Type="nvarchar(max)" />
+    <Property Name="FacturaVencimiento" Type="nvarchar(max)" />
+    <Property Name="MetodoDePago" Type="nvarchar" MaxLength="20" />
+    <Property Name="MontoFactura" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="totalPagado" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="MontoPendiente" Type="numeric" Precision="2" Scale="2" Nullable="false" />
+    <Property Name="Sincronizado" Type="int" Nullable="false" />
+    <Property Name="IsDelete" Type="int" Nullable="false" />
+    <Property Name="Compagnia" Type="int" Nullable="false" />
+    <Property Name="vendedorId" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Pago">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VendorID" Type="nvarchar" MaxLength="128" />
+    <Property Name="FechaPago" Type="date" Nullable="false" />
+    <Property Name="MontoPagado" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="MetodoDePago" Type="nvarchar(max)" />
+    <Property Name="NumeroDeCheque" Type="nvarchar(max)" />
+    <Property Name="FechaDeCheque" Type="datetime" />
+    <Property Name="habilitado" Type="bit" Nullable="false" />
+    <Property Name="ClienteId" Type="nvarchar" MaxLength="20" />
+    <Property Name="Pendiente" Type="bit" Nullable="false" />
+    <Property Name="Sincronizado" Type="int" Nullable="false" />
+    <Property Name="IsDelete" Type="int" Nullable="false" />
+    <Property Name="Compagni" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PagoDetallle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FacturaId" Type="nvarchar(max)" />
+    <Property Name="MontoAplicado" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="montoDeFacturaAlMomento" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Sincronizado" Type="int" Nullable="false" />
+    <Property Name="IsDelete" Type="int" Nullable="false" />
+    <Property Name="Compagni" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PedidoDetalle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Precio" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Cantidad" Type="int" Nullable="false" />
+    <Property Name="ProductoId" Type="int" Nullable="false" />
+    <Property Name="Codigo" Type="nvarchar" MaxLength="30" />
+    <Property Name="Nombre" Type="varchar(max)" />
+    <Property Name="PedidoId" Type="int" />
+    <Property Name="Sincronizado" Type="int" Nullable="false" />
+    <Property Name="IsDelete" Type="int" Nullable="false" />
+    <Property Name="Compagnia" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pedidos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="ClienteId" Type="int" />
+    <Property Name="NumeroOrden" Type="int" Nullable="false" />
+    <Property Name="FechaOrden" Type="datetime2" Precision="7" />
+    <Property Name="totalAPagar" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Impuestos" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CreadoPor" Type="nvarchar" MaxLength="200" />
+    <Property Name="Sincronizado" Type="int" Nullable="false" />
+    <Property Name="IsDelete" Type="int" Nullable="false" />
+    <Property Name="Compagnia" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Compagnia" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IsDelete" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" />
+    <Property Name="OuM" Type="nvarchar(max)" />
+    <Property Name="Precio" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Codigo" Type="nvarchar(max)" />
+    <Property Name="Cantidad" Type="int" Nullable="false" />
+    <Property Name="Sincronizado" Type="int" Nullable="false" />
+    <Property Name="TipodeVenta" Type="varchar" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="SigaAppDB03ModelStoreContainer">
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleFactura" EntityType="Self.DetalleFactura" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Factura" EntityType="Self.Factura" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pago" EntityType="Self.Pago" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PagoDetallle" EntityType="Self.PagoDetallle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PedidoDetalle" EntityType="Self.PedidoDetalle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

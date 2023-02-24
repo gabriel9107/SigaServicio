@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SigaAppDB03ModelStoreContainer" CdmEntityContainer="SigaAppDB03Entities2">
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="SigaAppDB03Model.Cliente">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="sincronizado" ColumnName="sincronizado" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="compagnia" ColumnName="compagnia" />
+          <ScalarProperty Name="telefono2" ColumnName="telefono2" />
+          <ScalarProperty Name="telefono1" ColumnName="telefono1" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="codigoVendedor" ColumnName="codigoVendedor" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="comentario" ColumnName="comentario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Producto">
+      <EntityTypeMapping TypeName="SigaAppDB03Model.Producto">
+        <MappingFragment StoreEntitySet="Producto">
+          <ScalarProperty Name="TipodeVenta" ColumnName="TipodeVenta" />
+          <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="OuM" ColumnName="OuM" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Compagnia" ColumnName="Compagnia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pedidos">
+      <EntityTypeMapping TypeName="SigaAppDB03Model.Pedidos">
+        <MappingFragment StoreEntitySet="Pedidos">
+          <ScalarProperty Name="Compagnia" ColumnName="Compagnia" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+          <ScalarProperty Name="CreadoPor" ColumnName="CreadoPor" />
+          <ScalarProperty Name="Impuestos" ColumnName="Impuestos" />
+          <ScalarProperty Name="totalAPagar" ColumnName="totalAPagar" />
+          <ScalarProperty Name="FechaOrden" ColumnName="FechaOrden" />
+          <ScalarProperty Name="NumeroOrden" ColumnName="NumeroOrden" />
+          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PedidoDetalle">
+      <EntityTypeMapping TypeName="SigaAppDB03Model.PedidoDetalle">
+        <MappingFragment StoreEntitySet="PedidoDetalle">
+          <ScalarProperty Name="Compagnia" ColumnName="Compagnia" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+          <ScalarProperty Name="PedidoId" ColumnName="PedidoId" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="ProductoId" ColumnName="ProductoId" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Factura">
+      <EntityTypeMapping TypeName="SigaAppDB03Model.Factura">
+        <MappingFragment StoreEntitySet="Factura">
+          <ScalarProperty Name="vendedorId" ColumnName="vendedorId" />
+          <ScalarProperty Name="Compagnia" ColumnName="Compagnia" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+          <ScalarProperty Name="MontoPendiente" ColumnName="MontoPendiente" />
+          <ScalarProperty Name="totalPagado" ColumnName="totalPagado" />
+          <ScalarProperty Name="MontoFactura" ColumnName="MontoFactura" />
+          <ScalarProperty Name="MetodoDePago" ColumnName="MetodoDePago" />
+          <ScalarProperty Name="FacturaVencimiento" ColumnName="FacturaVencimiento" />
+          <ScalarProperty Name="FacturaFecha" ColumnName="FacturaFecha" />
+          <ScalarProperty Name="clienteNombre" ColumnName="clienteNombre" />
+          <ScalarProperty Name="clienteId" ColumnName="clienteId" />
+          <ScalarProperty Name="PedidoId" ColumnName="PedidoId" />
+          <ScalarProperty Name="FacturaId" ColumnName="FacturaId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleFactura">
+      <EntityTypeMapping TypeName="SigaAppDB03Model.DetalleFactura">
+        <MappingFragment StoreEntitySet="DetalleFactura">
+          <ScalarProperty Name="Compagnia" ColumnName="Compagnia" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+          <ScalarProperty Name="montoLinea" ColumnName="montoLinea" />
+          <ScalarProperty Name="PrecioVenta" ColumnName="PrecioVenta" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="ProductoCodigo" ColumnName="ProductoCodigo" />
+          <ScalarProperty Name="LineaNumero" ColumnName="LineaNumero" />
+          <ScalarProperty Name="FacturaId" ColumnName="FacturaId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pago">
+      <EntityTypeMapping TypeName="SigaAppDB03Model.Pago">
+        <MappingFragment StoreEntitySet="Pago">
+          <ScalarProperty Name="Compagni" ColumnName="Compagni" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+          <ScalarProperty Name="Pendiente" ColumnName="Pendiente" />
+          <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+          <ScalarProperty Name="habilitado" ColumnName="habilitado" />
+          <ScalarProperty Name="FechaDeCheque" ColumnName="FechaDeCheque" />
+          <ScalarProperty Name="NumeroDeCheque" ColumnName="NumeroDeCheque" />
+          <ScalarProperty Name="MetodoDePago" ColumnName="MetodoDePago" />
+          <ScalarProperty Name="MontoPagado" ColumnName="MontoPagado" />
+          <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+          <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PagoDetallle">
+      <EntityTypeMapping TypeName="SigaAppDB03Model.PagoDetallle">
+        <MappingFragment StoreEntitySet="PagoDetallle">
+          <ScalarProperty Name="Compagni" ColumnName="Compagni" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Sincronizado" ColumnName="Sincronizado" />
+          <ScalarProperty Name="montoDeFacturaAlMomento" ColumnName="montoDeFacturaAlMomento" />
+          <ScalarProperty Name="MontoAplicado" ColumnName="MontoAplicado" />
+          <ScalarProperty Name="FacturaId" ColumnName="FacturaId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

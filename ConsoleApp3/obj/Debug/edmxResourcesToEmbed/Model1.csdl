@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SigaAppDB03Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="SigaAppDB03Entities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cliente" EntityType="SigaAppDB03Model.Cliente" />
+    <EntitySet Name="Producto" EntityType="SigaAppDB03Model.Producto" />
+    <EntitySet Name="Pedidos" EntityType="SigaAppDB03Model.Pedidos" />
+    <EntitySet Name="PedidoDetalle" EntityType="SigaAppDB03Model.PedidoDetalle" />
+    <EntitySet Name="Factura" EntityType="SigaAppDB03Model.Factura" />
+    <EntitySet Name="DetalleFactura" EntityType="SigaAppDB03Model.DetalleFactura" />
+    <EntitySet Name="Pago" EntityType="SigaAppDB03Model.Pago" />
+    <EntitySet Name="PagoDetallle" EntityType="SigaAppDB03Model.PagoDetallle" />
+  </EntityContainer>
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="comentario" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="codigo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="codigoVendedor" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="telefono1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="telefono2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="compagnia" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="activo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="sincronizado" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Compagnia" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IsDelete" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OuM" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Precio" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Codigo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <Property Name="Sincronizado" Type="Int32" Nullable="false" />
+    <Property Name="TipodeVenta" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Pedidos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="ClienteId" Type="Int32" />
+    <Property Name="NumeroOrden" Type="Int32" Nullable="false" />
+    <Property Name="FechaOrden" Type="DateTime" Precision="7" />
+    <Property Name="totalAPagar" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Impuestos" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="CreadoPor" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Sincronizado" Type="Int32" Nullable="false" />
+    <Property Name="IsDelete" Type="Int32" Nullable="false" />
+    <Property Name="Compagnia" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PedidoDetalle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Precio" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <Property Name="ProductoId" Type="Int32" Nullable="false" />
+    <Property Name="Codigo" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PedidoId" Type="Int32" />
+    <Property Name="Sincronizado" Type="Int32" Nullable="false" />
+    <Property Name="IsDelete" Type="Int32" Nullable="false" />
+    <Property Name="Compagnia" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Factura">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="FacturaId" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="PedidoId" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <Property Name="clienteId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="clienteNombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FacturaFecha" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FacturaVencimiento" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MetodoDePago" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="MontoFactura" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="totalPagado" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="MontoPendiente" Type="Decimal" Nullable="false" Precision="2" Scale="2" />
+    <Property Name="Sincronizado" Type="Int32" Nullable="false" />
+    <Property Name="IsDelete" Type="Int32" Nullable="false" />
+    <Property Name="Compagnia" Type="Int32" Nullable="false" />
+    <Property Name="vendedorId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DetalleFactura">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FacturaId" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="LineaNumero" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ProductoCodigo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Nombre" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Qty" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PrecioVenta" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="montoLinea" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Sincronizado" Type="Int32" Nullable="false" />
+    <Property Name="IsDelete" Type="Int32" Nullable="false" />
+    <Property Name="Compagnia" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pago">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VendorID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="MontoPagado" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="MetodoDePago" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NumeroDeCheque" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FechaDeCheque" Type="DateTime" Precision="3" />
+    <Property Name="habilitado" Type="Boolean" Nullable="false" />
+    <Property Name="ClienteId" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Pendiente" Type="Boolean" Nullable="false" />
+    <Property Name="Sincronizado" Type="Int32" Nullable="false" />
+    <Property Name="IsDelete" Type="Int32" Nullable="false" />
+    <Property Name="Compagni" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PagoDetallle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FacturaId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MontoAplicado" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="montoDeFacturaAlMomento" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Sincronizado" Type="Int32" Nullable="false" />
+    <Property Name="IsDelete" Type="Int32" Nullable="false" />
+    <Property Name="Compagni" Type="Int32" Nullable="false" />
+  </EntityType>
+</Schema>
